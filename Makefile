@@ -4,9 +4,11 @@ ifndef VERBOSE
 .SILENT:
 endif
 
+export COMPOSE_PROJECT_NAME=table-to-core-model
+
 DOCKER-COMPOSE=docker-compose \
 		-f ./infrastructure/docker-compose.yml \
-		-f  ./infrastructure/docker-compose.local.yml
+		-f ./infrastructure/docker-compose.local.yml
 
 venv:
 	@if [ ! -d venv ]; then python3 -m venv --copies venv; fi;
@@ -43,7 +45,6 @@ clean:
 full-clean:
 	echo "*** Full Cleaning services ..."
 	$(DOCKER-COMPOSE) down -v --rmi all
-
 
 bash:
 	$(DOCKER-COMPOSE) run main /bin/sh

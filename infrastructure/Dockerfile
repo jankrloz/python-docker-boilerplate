@@ -16,4 +16,6 @@ WORKDIR /app
 COPY --from=builder /install /usr/local
 COPY . .
 
-CMD [ "python", "index.py" ]
+ENV FLASK_ENV=development
+ENV FLASK_APP=./src/app.py
+CMD [ "flask", "run", "--host=0.0.0.0" ]
