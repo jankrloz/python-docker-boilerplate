@@ -1,4 +1,8 @@
 .git/
-infrastructure/
+infrastructure
 .dockerignore
 .gitignore
+.mypy_cache
+.vscode
+venv
+Makefile

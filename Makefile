@@ -45,8 +45,8 @@ full-clean:
 	$(DOCKER-COMPOSE) down -v --rmi all
 
 
-bash: start
-	$(DOCKER-COMPOSE) exec main /bin/sh
+bash:
+	$(DOCKER-COMPOSE) run main /bin/sh
 
 status:
 	echo "*** Status of containers ..."

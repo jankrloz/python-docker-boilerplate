@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   main:
+    image: main
     container_name: main
     build:
       context: ..

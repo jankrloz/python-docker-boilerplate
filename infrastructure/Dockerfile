@@ -1,11 +1,15 @@
 FROM python:3.9-alpine as base
 
 FROM base as builder
-RUN apk add build-base
+COPY requirements.txt /requirements.txt
 RUN mkdir /install
 WORKDIR /install
-COPY requirements.txt /requirements.txt
-RUN pip install --prefix=/install -r /requirements.txt
+
+ARG BUILD_DEPS="build-base gcc musl-dev"
+RUN apk add --no-cache --virtual ${BUILD_DEPS} \
+    && pip install --upgrade pip \
+    && pip install --no-cache-dir --prefix=/install -r /requirements.txt \
+    && apk del ${BUILD_DEPS}
 
 FROM base
 WORKDIR /app
