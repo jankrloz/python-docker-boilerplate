@@ -1,0 +1,4 @@
+.git/
+infrastructure/
+.dockerignore
+.gitignore

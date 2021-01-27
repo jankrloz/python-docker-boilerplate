@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  main:
+    volumes:
+      - main:/usr/src/app
+      - /usr/src/app/.git
+      - /usr/src/app/infrastructure
+
+volumes:
+  main:
+    driver_opts:
+      type: none
+      device: $PWD
+      o: bind
