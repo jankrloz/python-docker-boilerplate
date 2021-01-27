@@ -5,9 +5,9 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - main:/usr/src/app
-      - /usr/src/app/.git
-      - /usr/src/app/infrastructure
+      - main:/app
+      - /app/.git
+      - /app/infrastructure
 
 volumes:
   main:

@@ -22,39 +22,40 @@ install: venv
 		pip install -r requirements.txt; \
 	)
 
+build-force: PARAMS = --no-cache
+build build-force:
+	$(DOCKER-COMPOSE) build --parallel --force-rm --pull $(PARAMS)
 
-start: PARAMS = -d
-build-start: PARAMS = --build -d
-start build-start: install
-	echo "*** Starting up services ..."
-	$(DOCKER-COMPOSE) up $(PARAMS)
+start: install
+	echo "*** Starting up services ***"
+	$(DOCKER-COMPOSE) up -d
 
 restart: stop start
 
-fresh-start: clean build-start
-	echo "*** Fresh starting up services ..."
+fresh-start: clean build start
+	echo "*** Fresh starting up services ***"
 
 stop:
-	echo "*** Stopping up services ..."
+	echo "*** Stopping services ***"
 	$(DOCKER-COMPOSE) down
 
 clean:
-	echo "*** Cleaning up services..."
+	echo "*** Cleaning up services ***"
 	$(DOCKER-COMPOSE) rm -fsv
 
-full-clean:
-	echo "*** Full Cleaning services ..."
+boom:
+	echo "*** BOOM! ***"
 	$(DOCKER-COMPOSE) down -v --rmi all
 
 bash:
 	$(DOCKER-COMPOSE) run main /bin/sh
 
 status:
-	echo "*** Status of containers ..."
+	echo "*** Status of containers ***"
 	$(DOCKER-COMPOSE) ps
 
 
 debug: PARAMS = -f
 logs debug: start
-	echo "*** Showing containers logs ..."
+	echo "*** Showing containers logs ***"
 	$(DOCKER-COMPOSE) logs -t $(PARAMS)
